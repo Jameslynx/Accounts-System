@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
     input.value = "";
     input.name = "fileup";
     input.id = "fileup";
+    input.accept = "image/*";
     let container = document.querySelector(".btn-container");
     launcher.addEventListener("click", () => {
       container.appendChild(input);
