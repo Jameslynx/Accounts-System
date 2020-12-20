@@ -18,7 +18,6 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 router.post("/dashboard", ensureAuthenticated, upload.none(), (req, res) => {
   let data = Buffer.from(req.body.thumbnail.split(/,/)[1], "base64");
   jimp.read(data, (err, image) => {
-    console.log(err, image);
     if (err) {
       return res.send("image update failed");
     } else {
