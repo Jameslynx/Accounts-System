@@ -7,10 +7,6 @@ const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
 
-// DB Config
-process.env.MONGO_URI =
-  "mongodb+srv://Jimmy:cZxXSbiiGc5MNo8j@cluster0.ghr2a.mongodb.net/Cluster0?retryWrites=true&w=majority";
-
 // Connect to MongoDB
 mongoose.connect(
   process.env.MONGO_URI,
