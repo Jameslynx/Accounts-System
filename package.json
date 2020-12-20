@@ -1,0 +1,39 @@
+{
+  "name": "job-corner",
+  "version": "1.0.0",
+  "description": "simple search for available job and services providers around your locale",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [
+    "Job",
+    "Services",
+    "Labour",
+    "Work",
+    "Service"
+  ],
+  "author": "James Muiruri (Jimmy)",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "jimp": "^0.16.1",
+    "mongoose": "^5.10.16",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
