@@ -9,6 +9,14 @@ const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  confirmed: {
+    type: Boolean,
+    default: false,
+  },
+  status: {
+    type: String,
+    default: "pending",
+  },
   dp: {
     data: { type: Buffer, default: dummy },
     contentType: { type: String, default: "image/png" },

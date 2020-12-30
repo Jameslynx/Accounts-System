@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Image schema for image storage
 const imageSchema = mongoose.Schema({
   desc: String,
   img: {
