@@ -11,11 +11,19 @@ router.get("/", (req, res) => {
 
 // Dashboard page
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
+  if (req.user.status == "pending") {
+    req.logout();
+    return res.redirect("/users/verification/mailAuth");
+  }
   res.render("dashboard", { name: req.user.name, dp: req.user.dp });
 });
 
 // Dashboard handle
 router.post("/dashboard", ensureAuthenticated, upload.none(), (req, res) => {
+  if (req.user.status == "pending") {
+    req.logout();
+    return res.redirect("/users/verification/mailAuth");
+  }
   let data = Buffer.from(req.body.thumbnail.split(/,/)[1], "base64");
   jimp.read(data, (err, image) => {
     if (err) {

@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 const User = require("../models/User");
+const secretCode = require("../models/codes");
+const Mailer = require("../config/mailer");
 
 // Login page
 router.get("/login", (req, res) => {
@@ -18,7 +20,6 @@ router.get("/register", (req, res) => {
 // Handle Register
 router.post("/register", (req, res) => {
   const { name, email, password, password2 } = req.body;
-  console.log(name, email, password, password2);
   let errors = [];
 
   // Check required fields
@@ -54,7 +55,23 @@ router.post("/register", (req, res) => {
           if (err) console.log(err);
           else {
             req.flash("success_msg", "You are now registered and can log in");
-            res.redirect("/users/login");
+            let secCode = new secretCode({ email, code: user._id });
+            secCode.save((err, code) => {
+              if (err) console.log(err);
+              Mailer.mailConfig(
+                email,
+                name,
+                code.code,
+                code._id,
+                req.headers.host
+              );
+              Mailer.sender((err, info) => {
+                if (err) console.log(err);
+                else {
+                  res.redirect("/users/verification/mailAuth");
+                }
+              });
+            });
           }
         });
       }
