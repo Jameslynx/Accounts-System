@@ -16,7 +16,11 @@ module.exports = (passport) => {
         if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false, { message: "Password incorrect" });
         }
-        return done(null, user);
+        if (user.confirmed) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "email not verified" });
+        }
       });
     })
   );
