@@ -54,7 +54,6 @@ router.post("/register", (req, res) => {
         newUser.save((err, user) => {
           if (err) console.log(err);
           else {
-            req.flash("success_msg", "You are now registered and can log in");
             let secCode = new secretCode({ email, code: user._id });
             secCode.save((err, code) => {
               if (err) console.log(err);
