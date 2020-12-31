@@ -17,9 +17,12 @@ class Mailer {
       from: process.env.EMAIL,
       to: email,
       subject: "Registration mail verification",
-      html: `<div style="color:#adefd1ff;backgroundcolor:#00203fff"><h1>Welcome, <span style="color:#fffffff">${name}<span>
-      </h1><p>Click this link to log in: <a href="http8://${host}/users/verification/mailAuth/${code}/${codeId}" target="_blank">
-      ${host}/users/verification/mailAuth/${code}/${codeId}</a></p></div>`,
+      html: `<div style="color:#FEE715FF;background-color:#101820FF;text-align:center;padding: 10px 0px 10px 0px">
+      <h1>Welcome, <span style="color:#ffffff;">${name}<span></h1>
+      <img src="https://cdn.pixabay.com/photo/2017/06/26/09/41/lavender-2443220_960_720.jpg" width="40%" height="auto">
+      <p>Click this link to log in: <a href="http://${host}/users/verification/mailAuth/${code}/${codeId}" target="_blank">
+      ${host}/users/verification/mailAuth/${code}/${codeId}</a></p>
+      </div>`,
     };
   }
 
