@@ -5,6 +5,7 @@ const passport = require("passport");
 
 const User = require("../models/User");
 const secretCode = require("../models/codes");
+const log = require("../models/maillog");
 const Mailer = require("../config/mailer");
 
 // Login page
@@ -54,23 +55,7 @@ router.post("/register", (req, res) => {
         newUser.save((err, user) => {
           if (err) console.log(err);
           else {
-            let secCode = new secretCode({ email, code: user._id });
-            secCode.save((err, code) => {
-              if (err) console.log(err);
-              Mailer.mailConfig(
-                email,
-                name,
-                code.code,
-                code._id,
-                req.headers.host
-              );
-              Mailer.sender((err, info) => {
-                if (err) console.log(err);
-                else {
-                  res.redirect("/users/verification/mailAuth");
-                }
-              });
-            });
+            mailerCoderLogger(user, req, res);
           }
         });
       }
@@ -93,5 +78,28 @@ router.get("/logout", (req, res) => {
   req.flash("success_msg", "You are logged out");
   res.redirect("/users/login");
 });
+
+function mailerCoderLogger(user, req, res) {
+  let secCode = new secretCode({ email: user.email, code: user._id });
+  secCode.save((err, code) => {
+    if (err) console.log(err);
+    Mailer.mailConfig(
+      user.email,
+      user.name,
+      code.code,
+      code._id,
+      req.headers.host
+    );
+    Mailer.sender((err, info) => {
+      if (err) console.log(err);
+      else {
+        new log({ email: user.email, count: 1 }).save((err, doc) => {
+          if (err) console.log(err);
+          else res.redirect("/users/verification/mailAuth");
+        });
+      }
+    });
+  });
+}
 
 module.exports = router;
