@@ -11,16 +11,20 @@ module.exports = (passport) => {
       User.findOne({ email: email }, (err, user) => {
         if (err) console.log(err);
         else if (!user) {
+          // user doesn't exist
           return done(null, false, { message: "That email is not registered" });
         }
         if (!bcrypt.compareSync(password, user.password)) {
+          // password incorrect
           return done(null, false, { message: "Password incorrect" });
         }
         // check if user is verified
         if (user.confirmed) {
+          // user found, verified and password matched
           return done(null, user);
         } else {
-          return done(null, false, { message: "email not verified" });
+          // user account not verified yet
+          return done(null, false, { message: "acount not verified" });
         }
       });
     })
