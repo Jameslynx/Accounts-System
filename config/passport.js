@@ -24,7 +24,7 @@ module.exports = (passport) => {
           return done(null, user);
         } else {
           // user account not verified yet
-          return done(null, false, { message: "acount not verified" });
+          return done(null, false, { message: "account not verified" });
         }
       });
     })
