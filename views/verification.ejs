@@ -8,12 +8,14 @@
         Login link has been sent to your email for verification;
         <span class="text-warning">expires in 10 minutes</span>
       </div>
-      <form action="/users/verification/resend">
+      <form method="POST" action="/users/verification/resend">
         <div class="mb-3">
           <input
             type="email"
             class="form-control"
             id="email"
+            name="email"
+            ;
             aria-describedby="emailHelp"
             placeholder="my-email..."
           />
