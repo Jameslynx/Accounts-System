@@ -1,15 +1,21 @@
 <% addScripts(['resize.js', 'profile-pic.js', 'file-input.js']) %>
 
-<h1 class="mt-4">Dashboard</h1>
-<%- include ("partials/messages") %>
-<div>
-  <article>
-    <img
-      class="img-thumbnail"
-      src="data:image/<%=dp.contentType%>;base64,<%=dp.data.toString('base64')%>"
-    />
-  </article>
-  <%- include ("partials/profile-pic") %>
+<div class="row mt-5">
+  <div class="col-md-10 m-auto">
+    <div class="card card-body text-center">
+      <h1 class="mt-4">Dashboard</h1>
+      <%- include ("partials/messages") %>
+      <div>
+        <article>
+          <img
+            class="img-thumbnail"
+            src="data:image/<%=dp.contentType%>;base64,<%=dp.data.toString('base64')%>"
+          />
+        </article>
+        <%- include ("partials/profile-pic") %>
+      </div>
+      <p class="lead mb-3">Welcome <%= name %></p>
+      <a href="/users/logout" class="btn btn-primary">Logout</a>
+    </div>
+  </div>
 </div>
-<p class="lead mb-3">Welcome <%= name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
