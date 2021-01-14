@@ -26,6 +26,20 @@ class Mailer {
     };
   }
 
+  resetMailConfig(email, name, code, codeId, host) {
+    this.mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Password Reset",
+      html: `<div style="color:#FEE715FF;background-color:#101820FF;text-align:center;padding: 10px 0px 10px 0px">
+      <h1>Let's get you logged in, <span style="color:#ffffff;">${name}<span></h1>
+      <img src="https://cdn.pixabay.com/photo/2020/05/25/02/05/key-5216637_960_720.jpg" width="40%" height="auto">
+      <p>Click this link to reset password: <a href="http://${host}/users/password/passwordReset/${code}/${codeId}" target="_blank">
+      ${host}/users/password/passwordReset/${code}/${codeId}</a></p>
+      </div>`,
+    };
+  }
+
   sender(cb) {
     this.transporter.sendMail(this.mailOptions, cb);
   }

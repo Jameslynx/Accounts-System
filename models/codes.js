@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 
 // user registeration codes schema
 const secretSchema = new Schema({
+  cat: {
+    type: String,
+    default: "verification",
+  },
   email: {
     type: String,
     required: true,

@@ -7,6 +7,7 @@ const User = require("../models/User");
 const secretCode = require("../models/codes");
 const log = require("../models/maillog");
 const Mailer = require("../config/mailer");
+const PassTester = require("../config/passparser");
 
 // Login page
 router.get("/login", (req, res) => {
@@ -28,13 +29,12 @@ router.post("/register", (req, res) => {
     errors.push({ msg: "Please fill in all fields" });
   }
 
+  if (password) {
+    errors = errors.concat(PassTester.test(password));
+  }
   // Check passwords match
   if (password !== password2) {
     errors.push({ msg: "Passwords do not match" });
-  }
-
-  if (password && password.length < 6) {
-    errors.push({ msg: "Password should be at least 6 characters" });
   }
 
   if (errors.length) {

@@ -21,14 +21,14 @@
 </div>
 <% } %> <% if(error != '') {%>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <% if (error = "account not verified") { %> <%=error %>
+  <% if (error === "account not verified") { %> <%=error %>
   <a
     href="/users/verification/mailAuth"
     class="btn btn-secondary"
     role="button"
   >
     Verify</a
-  ><% } else { %> <%=error_msg %> <% } %>
+  ><% } else { %> <%=error %> <% } %>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
