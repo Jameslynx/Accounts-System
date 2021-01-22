@@ -4,19 +4,19 @@ class PassParser {
   }
 
   checkLower() {
-    return /[a-z]/i.test(this.password);
+    return /[a-z]/.test(this.password);
   }
 
   checkUpper() {
-    return /[A-Z]/i.test(this.password);
+    return /[A-Z]/.test(this.password);
   }
 
   checkNumbers() {
-    return /\d/i.test(this.password);
+    return /\d/.test(this.password);
   }
 
   checkSymbols() {
-    return /[^0-9a-zA-Z]/i.test(this.password);
+    return /[^0-9a-zA-Z]/.test(this.password);
   }
 
   test(password) {
@@ -27,8 +27,10 @@ class PassParser {
       { msg: "Password should contain Digit(s)" },
       { msg: "Password should contain Symbol(s)" },
     ];
+
     this.password = password;
     if (
+      this.password &&
       this.checkLength() &&
       this.checkLower() &&
       this.checkUpper() &&

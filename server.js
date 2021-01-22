@@ -2,14 +2,27 @@ require("dotenv/config");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
 
+let mongo_uri = process.env.MONGO_URI;
 // Connect to MongoDB
+if (process.env.NODE_ENV === "test") {
+  mongo_uri = process.env.TSTDB_URI;
+}
+
+// instruct mongoose to emit 'ready' when it's finished connecting
+mongoose.connection.once("open", function () {
+  // All OK - fire (emit) a ready event.
+  console.log("Connected to MongoDB");
+  app.emit("ready");
+});
+
 mongoose.connect(
-  process.env.MONGO_URI,
+  mongo_uri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -18,12 +31,17 @@ mongoose.connect(
   },
   (err) => {
     if (err) throw err;
-    console.log("database connected");
   }
 );
 
 // express Config
 const app = express();
+
+//don't show the log when it is test
+if (process.env.NODE_ENV !== "test") {
+  //use morgan to log at command line
+  app.use(morgan("combined")); //'combined' outputs the Apache style LOGs
+}
 
 // cors
 app.use(cors());
@@ -85,7 +103,12 @@ app.use("/users", require("./routes/users"));
 app.use("/users/verification", require("./routes/verification"));
 app.use("/users/password", require("./routes/passReset"));
 
+module.exports = app; // for testing
+
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}...`);
+app.on("ready", function () {
+  app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}...`);
+    app.emit("appStarted");
+  });
 });

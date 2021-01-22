@@ -8,6 +8,7 @@ const secretCode = require("../models/codes");
 const log = require("../models/maillog");
 const Mailer = require("../config/mailer");
 const PassTester = require("../config/passparser");
+const { ensureAuthenticated } = require("../config/auth");
 
 // Login page
 router.get("/login", (req, res) => {
@@ -77,6 +78,23 @@ router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "You are logged out");
   res.redirect("/users/login");
+});
+
+// Delete Handle
+router.post("/delete", ensureAuthenticated, (req, res) => {
+  let password = req.body.password;
+  if (bcrypt.compareSync(req.user.password, password)) {
+    User.findByIdAndDelete(req.user._id, (err, user) => {
+      if (err) console.log(err);
+      else {
+        req.flash("success_msg", "Account successfully closed");
+        res.redirect("/users/register");
+      }
+    });
+  } else {
+    req.flash("error_msg", "Account deletion failed; password did not match");
+    res.redirect("/dashboard");
+  }
 });
 
 function mailerCoderLogger(user, req, res) {

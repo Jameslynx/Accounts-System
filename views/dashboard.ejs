@@ -15,7 +15,75 @@
         <%- include ("partials/profile-pic") %>
       </div>
       <p class="lead mb-3">Welcome <%= name %></p>
-      <a href="/users/logout" class="btn btn-primary">Logout</a>
+      <a href="/users/logout" class="btn btn-primary"
+        ><i class="fas fa-sign-out-alt"></i> Logout</a
+      >
+      <button
+        type="button"
+        class="btn btn-outline-primary mt-1"
+        data-toggle="modal"
+        data-target="#deleteAccount"
+        id="modal-launcher"
+      >
+        <i class="fas fa-user-minus"></i> Delete Account
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="deleteAccount"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-2"
+        aria-labelledby="deleteAccountLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteAccountLabel">
+                Delete Account
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h1><i class="fas fa-user-minus fa-2x"></i></h1>
+              <form method="post" action="/users/delete">
+                <div class="mb-3">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    required="required"
+                    aria-describedby="passwordHelp"
+                  />
+                  <div id="passwordHelp" class="form-text">
+                    Enter your account password
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Delete</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
