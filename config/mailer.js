@@ -25,7 +25,7 @@ class Mailer {
       html: `<div style="color:#FEE715FF;background-color:#101820FF;text-align:center;padding: 10px 0px 10px 0px">
       <h1>Welcome, <span style="color:#ffffff;">${name}<span></h1>
       <img src="https://cdn.pixabay.com/photo/2017/06/26/09/41/lavender-2443220_960_720.jpg" width="40%" height="auto">
-      <p>Click this link to log in: <a href="http://${host}/users/verification/mailAuth/${code}/${codeId}" target="_blank">
+      <p>Click this link to log in: <a href="https://${host}/users/verification/mailAuth/${code}/${codeId}" target="_blank">
       ${host}/users/verification/mailAuth/${code}/${codeId}</a></p>
       </div>`,
     };
@@ -39,7 +39,7 @@ class Mailer {
       html: `<div style="color:#FEE715FF;background-color:#101820FF;text-align:center;padding: 10px 0px 10px 0px">
       <h1>Let's get you logged in, <span style="color:#ffffff;">${name}<span></h1>
       <img src="https://cdn.pixabay.com/photo/2020/05/25/02/05/key-5216637_960_720.jpg" width="40%" height="auto">
-      <p>Click this link to reset password: <a href="http://${host}/users/password/passwordReset/${code}/${codeId}" target="_blank">
+      <p>Click this link to reset password: <a href="https://${host}/users/password/passwordReset/${code}/${codeId}" target="_blank">
       ${host}/users/password/passwordReset/${code}/${codeId}</a></p>
       </div>`,
     };
