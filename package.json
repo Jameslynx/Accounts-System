@@ -1,19 +1,17 @@
 {
-  "name": "job-corner",
+  "name": "registration-system",
   "version": "1.0.0",
-  "description": "simple search for available job and services providers around your locale",
+  "description": "registration system; registration, verification, login, reset and logout",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --timeout 30000",
+    "test": "NODE_ENV=test mocha --timeout 60000",
     "start": "NODE_ENV=dev node server",
     "dev": "NODE_ENV=dev nodemon server"
   },
   "keywords": [
-    "Job",
-    "Services",
-    "Labour",
-    "Work",
-    "Service"
+    "registration system",
+    "login system",
+    "user profiles"
   ],
   "author": "James Muiruri (Jimmy)",
   "license": "ISC",
@@ -38,8 +36,11 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "chai-http": "^4.3.0",
+    "chromedriver": "^88.0.0",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "selenium-webdriver": "^4.0.0-alpha.8"
   }
 }
