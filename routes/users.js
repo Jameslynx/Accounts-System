@@ -83,7 +83,7 @@ router.get("/logout", (req, res) => {
 // Delete Handle
 router.post("/delete", ensureAuthenticated, (req, res) => {
   let password = req.body.password;
-  if (bcrypt.compareSync(req.user.password, password)) {
+  if (bcrypt.compareSync(password, req.user.password)) {
     User.findByIdAndDelete(req.user._id, (err, user) => {
       if (err) console.log(err);
       else {
